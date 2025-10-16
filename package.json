@@ -1,0 +1,13 @@
+{
+  "name": "wp-automation",
+  "version": "1.0.0",
+  "description": "WhatsApp Group Order Automation System",
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build",
+    "start": "cd frontend && npm start",
+    "install-frontend": "cd frontend && npm install"
+  },
+  "keywords": ["whatsapp", "orders", "automation", "react", "dashboard"],
+  "author": "Your Name",
+  "license": "MIT"
+}
