@@ -1,0 +1,21 @@
+[Unit]
+Description=WhatsApp Order Backend API
+After=network.target postgresql.service redis.service
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/whatsapp-orders/backend
+Environment=PATH=/opt/whatsapp-orders/venv/bin
+Environment=VIRTUAL_ENV=/opt/whatsapp-orders/venv
+ExecStart=/opt/whatsapp-orders/venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=always
+RestartSec=5
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=whatsapp-api
+
+[Install]
+WantedBy=multi-user.target

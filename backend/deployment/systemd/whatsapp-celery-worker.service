@@ -1,0 +1,21 @@
+[Unit]
+Description=WhatsApp Order Celery Worker
+After=network.target redis.service postgresql.service
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/whatsapp-orders/backend
+Environment=PATH=/opt/whatsapp-orders/venv/bin
+Environment=VIRTUAL_ENV=/opt/whatsapp-orders/venv
+ExecStart=/opt/whatsapp-orders/venv/bin/celery -A app.celery_config.celery_app worker --loglevel=info --concurrency=4
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=whatsapp-celery-worker
+
+[Install]
+WantedBy=multi-user.target

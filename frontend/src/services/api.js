@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create axios instance with base configuration
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:3001/api',
+  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:8000/api',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
@@ -63,34 +63,65 @@ export const ordersAPI = {
 
 export const summariesAPI = {
   // Generate summary
-  generateSummary: () => api.get('/summaries'),
+  generateSummary: (groupId = null) => 
+    api.get('/summaries/generate', { params: groupId ? { group_id: groupId } : {} }),
   
   // Get summary with filters
   getSummaryWithFilters: (filters) => 
-    api.get('/summaries', { params: filters })
+    api.get('/summaries/generate', { params: filters })
 };
 
 export const exportAPI = {
   // Export orders to Excel
   exportToExcel: (filters = {}) => 
-    api.get('/export', { 
-      params: { type: 'excel', ...filters },
+    api.get('/export/excel', { 
+      params: filters,
       responseType: 'blob'
     }),
   
   // Export orders to CSV
   exportToCSV: (filters = {}) => 
-    api.get('/export', { 
-      params: { type: 'csv', ...filters },
+    api.get('/export/csv', { 
+      params: filters,
       responseType: 'blob'
     }),
   
   // Export orders to PDF
   exportToPDF: (filters = {}) => 
-    api.get('/export', { 
-      params: { type: 'pdf', ...filters },
+    api.get('/export/pdf', { 
+      params: filters,
       responseType: 'blob'
     })
+};
+
+export const authAPI = {
+  // User registration
+  register: (userData) => api.post('/auth/register', userData),
+  
+  // User login
+  login: (credentials) => api.post('/auth/token', credentials, {
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+  }),
+  
+  // Get current user
+  getCurrentUser: () => api.get('/auth/me'),
+  
+  // Verify token
+  verifyToken: () => api.get('/auth/verify-token')
+};
+
+export const whatsappAPI = {
+  // Get WhatsApp status
+  getStatus: () => api.get('/whatsapp/status'),
+  
+  // Connect to WhatsApp
+  connect: () => api.post('/whatsapp/connect'),
+  
+  // Get groups
+  getGroups: () => api.get('/whatsapp/groups'),
+  
+  // Test webhook
+  testWebhook: () => api.get('/whatsapp/webhook/test')
 };
 
 // Utility function to handle file download

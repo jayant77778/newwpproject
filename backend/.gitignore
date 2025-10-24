@@ -1,0 +1,97 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# Environment Variables
+.env
+.env.local
+.env.production
+
+# Database
+*.db
+*.sqlite3
+*.sql
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# WhatsApp Sessions
+whatsapp_sessions/
+!whatsapp_sessions/.gitkeep
+
+# Exports
+exports/
+!exports/.gitkeep
+
+# Static files
+static/
+!static/.gitkeep
+
+# Chrome Driver
+chromedriver*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# FastAPI
+.pytest_cache/
+htmlcov/
+.coverage
+.coverage.*
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Redis
+dump.rdb
+
+# Uploads
+uploads/
+temp/
+tmp/
+
+# Backup files
+*.bak
+*.backup
